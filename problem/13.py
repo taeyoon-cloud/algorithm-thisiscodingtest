@@ -5,9 +5,17 @@ n, m = map(int, input().split())
 graph = []
 INF = 987654321
 
+houses = [] # 집의 좌표를 저장하는 리스트
+chicken_houses = [] # 치킨 집의 좌표를 저장하는 리스트
+
 # 0: 빈 칸 / 1: 집 / 2: 치킨집
 for i in range(n):
     row = list(map(int, input().split()))
+    for c in range(n):
+        if row[c] == 1:
+            houses.append((i, c))
+        elif row[c] == 2:
+            chicken_houses.append((i, c))
     graph.append(row)
 
 
@@ -17,15 +25,6 @@ def calculate_distance(house, chicken_house):
     r2, c2 = chicken_house
     return abs(r1-r2) + abs(c1-c2)
 
-houses = [] # 집의 좌표를 저장하는 리스트
-chicken_houses = [] # 치킨 집의 좌표를 저장하는 리스트
-
-for i in range(n):
-    for j in range(n):
-        if graph[i][j] == 1:
-            houses.append((i, j))
-        elif graph[i][j] == 2:
-            chicken_houses.append((i, j))
 
 
 # 치킨 집 중 1~m개를 선택한 경우의 수들을 저장하고 있는 리스트들을 저장한 리스트
